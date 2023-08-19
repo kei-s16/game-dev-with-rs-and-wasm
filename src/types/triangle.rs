@@ -12,11 +12,7 @@ impl Triangle {
     /// シェルピンスキーの三角形を描画する
     /// * `context` - canvas要素を受け取る
     /// * `depth`  - 再帰の深さ
-    pub fn sierpinski(
-        &self,
-        context: &web_sys::CanvasRenderingContext2d,
-        depth: u8,
-    ) {
+    pub fn sierpinski(&self, context: &web_sys::CanvasRenderingContext2d, depth: u8) {
         self.draw(context);
 
         let depth = depth - 1;
@@ -35,22 +31,22 @@ impl Triangle {
             let right_middle = Self::midpoint(top, right);
             let bottom_middle = Self::midpoint(left, right);
 
-            let top_triangle = Triangle { points: [top, left_middle, right_middle], color: next_color };
-            let left_triangle = Triangle { points: [left_middle, left, bottom_middle], color: next_color };
-            let right_triangle = Triangle { points: [right_middle, bottom_middle, right], color: next_color };
+            let top_triangle = Triangle {
+                points: [top, left_middle, right_middle],
+                color: next_color,
+            };
+            let left_triangle = Triangle {
+                points: [left_middle, left, bottom_middle],
+                color: next_color,
+            };
+            let right_triangle = Triangle {
+                points: [right_middle, bottom_middle, right],
+                color: next_color,
+            };
 
-            top_triangle.sierpinski(
-                &context,
-                depth,
-            );
-            left_triangle.sierpinski(
-                &context,
-                depth,
-            );
-            right_triangle.sierpinski(
-                &context,
-                depth,
-            );
+            top_triangle.sierpinski(&context, depth);
+            left_triangle.sierpinski(&context, depth);
+            right_triangle.sierpinski(&context, depth);
         }
     }
 
@@ -77,4 +73,3 @@ impl Triangle {
         context.fill();
     }
 }
-

@@ -30,15 +30,14 @@ pub fn main_js() -> Result<(), JsValue> {
     let init_color = (0, 255, 0);
     let depth = 5;
 
-    let triangle = Triangle { points: init_points, color: init_color };
-    triangle.sierpinski(
-        &context,
-        depth
-    );
+    let triangle = Triangle {
+        points: init_points,
+        color: init_color,
+    };
+    triangle.sierpinski(&context, depth);
 
     // Your code goes here!
     console::log_1(&JsValue::from_str("Hello world!"));
 
     Ok(())
 }
-
